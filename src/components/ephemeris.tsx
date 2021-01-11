@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { map, size, join } from "lodash";
 import { timeToSeconds } from "../utils/time";
 import { x } from "@xstyled/styled-components";
@@ -23,61 +23,58 @@ interface Props {
   data: Day[];
 }
 
+const TOTAL_HEIGHT = 24 * 60 * 60;
+
 const Area = ({
   data,
-  width,
-  event1,
-  event2,
-  color,
+  event,
+  color = "grey",
+  placement,
 }: {
   data: Day[];
-  width: number;
-  event1: number | string;
-  event2: number | string;
-  color: string;
-}) => (
-  <polygon
-    points={`${width},0 0,0 ${join(
-      map(data, (day, i) => i + "," + timeToSeconds(day.sunrise)),
-      " "
-    )}`}
-  />
-);
+  event: keyof Day;
+  color?: string;
+  placement: "top" | "bottom";
+}) => {
+  const width = size(data);
+  const path = join(
+    map(data, (day, i) => i + "," + timeToSeconds(day[event])),
+    " "
+  );
+  const baseY = placement === "top" ? 0 : TOTAL_HEIGHT;
+  return (
+    <polygon points={`${width},${baseY} 0,${baseY} ${path}`} fill={color} />
+  );
+};
 
 export default ({ data }: Props) => {
   const countDays = size(data);
-  const totalHeight = 24 * 60 * 60;
   const [xPos, setXPos] = useState(0);
+  const overlay = useRef(null);
+
+  const handleMouseMove = (e: { screenX: React.SetStateAction<number> }) =>
+    setXPos(e.screenX - overlay.current.getBoundingClientRect().x);
 
   return (
-    <x.div position="relative">
+    <x.div h="100%" position="relative">
       <svg
         viewBox={`0 0 ${countDays - 1} ${24 * 60 * 60}`}
         style={{ width: "100%", height: "100%" }}
         preserveAspectRatio="none"
       >
-        <polygon
-          points={`${countDays - 1},0 0,0 ${join(
-            map(data, (day, i) => i + "," + timeToSeconds(day.sunrise)),
-            " "
-          )}`}
-        />
-        <polygon
-          points={`${countDays - 1},${totalHeight} 0,${totalHeight} ${join(
-            map(data, (day, i) => i + "," + timeToSeconds(day.sunset)),
-            " "
-          )}`}
-        />
+        <Area data={data} event="sunrise" placement="top" color="lightblue" />
+        <Area data={data} event="sunset" placement="bottom" color="lightblue" />
+        <Area data={data} event="civrise" placement="top" color="black" />
+        <Area data={data} event="civset" placement="bottom" color="black" />
       </svg>
       <x.div
+        ref={overlay}
         position="absolute"
         top={0}
         left={0}
         bottom={0}
         right={0}
-        onMouseMove={(e: { screenX: React.SetStateAction<number> }) =>
-          setXPos(e.screenX)
-        }
+        onMouseMove={handleMouseMove}
       >
         <x.div
           position="absolute"
