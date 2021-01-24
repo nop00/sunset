@@ -25,6 +25,7 @@ interface Props {
 
 const TOTAL_HEIGHT = 24 * 60 * 60;
 
+
 const Area = ({
   data,
   event,
@@ -50,10 +51,10 @@ const Area = ({
 export default ({ data }: Props) => {
   const countDays = size(data);
   const [xPos, setXPos] = useState(0);
-  const overlay = useRef(null);
+  const overlay = useRef(undefined);
 
   const handleMouseMove = (e: { screenX: React.SetStateAction<number> }) =>
-    setXPos(e.screenX - overlay.current.getBoundingClientRect().x);
+    overlay && setXPos(e.screenX - overlay.current.getBoundingClientRect().x);
 
   return (
     <x.div h="100%" position="relative">
