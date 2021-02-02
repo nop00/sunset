@@ -8,7 +8,9 @@ interface Props {
 }
 
 export default ({ from, to, value, onChange }: Props) => {
-  const onSlide = (e) => {onChange(e.target.value)};
+  const onSlide = (e) => {
+    onChange(e.target.value);
+  };
 
   return (
     <div className="slider-wrapper">

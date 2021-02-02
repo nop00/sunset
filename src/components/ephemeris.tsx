@@ -21,10 +21,11 @@ type Day = {
 
 interface Props {
   data: Day[];
+  lightsOnTime: number;
+  lightsOffTime: number;
 }
 
 const TOTAL_HEIGHT = 24 * 60 * 60;
-
 
 const Area = ({
   data,
@@ -48,7 +49,7 @@ const Area = ({
   );
 };
 
-export default ({ data }: Props) => {
+export default ({ data, lightsOnTime, lightsOffTime }: Props) => {
   const countDays = size(data);
   const [xPos, setXPos] = useState(0);
   const overlay = useRef(undefined);
@@ -65,8 +66,20 @@ export default ({ data }: Props) => {
       >
         <Area data={data} event="sunrise" placement="top" color="lightblue" />
         <Area data={data} event="sunset" placement="bottom" color="lightblue" />
-        <Area data={data} event="civrise" placement="top" color="black" />
-        <Area data={data} event="civset" placement="bottom" color="black" />
+        <Area data={data} event="civrise" placement="top" color="yellow" />
+        <Area data={data} event="civset" placement="bottom" color="yellow" />
+        <polygon
+          points={`365,${24 * 60 * 60} 0,${24 * 60 * 60} 0,${
+            24 * 60 * 60 - lightsOnTime * 60
+          } 365,${24 * 60 * 60 - lightsOnTime * 60}`}
+          fill="black"
+        />
+        <polygon
+          points={`365,0 0,0 0,${24 * 60 * 60 - lightsOffTime * 60} 365,${
+            24 * 60 * 60 - lightsOffTime * 60
+          }`}
+          fill="black"
+        />
       </svg>
       <x.div
         ref={overlay}

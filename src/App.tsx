@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Ephemeris from "./components/ephemeris";
 import data from "../data/ephemeris.json";
-import HorizontalCursor from "./components/horizontal-cursor";
 import "./styles.css";
 import { x } from "@xstyled/styled-components";
 import { map, split, join } from "lodash";
@@ -29,19 +28,19 @@ export default () => {
     return day;
   });
 
-  const [lightsOnTime, setLightsOnTime] = useState(0);
-  const [lightsOffTime, setLightsOffTime] = useState(24 * 60);
+  const [lightsOnTime, setLightsOnTime] = useState(5 * 60);
+  const [lightsOffTime, setLightsOffTime] = useState(23 * 60);
 
   return (
     <>
       <VerticalRangeSlider
         from={0}
-        to={10 * 60}
+        to={447}
         value={lightsOnTime}
         onChange={setLightsOnTime}
       />
       <VerticalRangeSlider
-        from={16 * 60}
+        from={919}
         to={24 * 60}
         value={lightsOffTime}
         onChange={setLightsOffTime}
@@ -55,7 +54,11 @@ export default () => {
         m="50px auto"
         overflow="hidden"
       >
-        <Ephemeris data={dataWithSavings} />
+        <Ephemeris
+          data={dataWithSavings}
+          lightsOnTime={lightsOnTime}
+          lightsOffTime={lightsOffTime}
+        />
       </x.div>
     </>
   );
