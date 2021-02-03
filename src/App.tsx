@@ -15,33 +15,35 @@ const subtractAnHour = (time: string) => {
 };
 
 export default () => {
-  const dataWithSavings = map(data, (day) => {
+  const dataWithSavings = map(data, day => {
     const curDay = new Date(day.date);
     if (curDay > SUMMER && curDay < WINTER) {
       return {
         sunrise: subtractAnHour(day.sunrise),
         sunset: subtractAnHour(day.sunset),
         civrise: subtractAnHour(day.civrise),
-        civset: subtractAnHour(day.civset),
+        civset: subtractAnHour(day.civset)
       };
     }
     return day;
   });
 
-  const [lightsOnTime, setLightsOnTime] = useState(5 * 60);
-  const [lightsOffTime, setLightsOffTime] = useState(23 * 60);
+  const [lightsOnTime, setLightsOnTime] = useState(5 * 60 * 60);
+  const [lightsOffTime, setLightsOffTime] = useState(22 * 60 * 60);
+
+  console.log(lightsOnTime, lightsOffTime);
 
   return (
     <>
       <VerticalRangeSlider
         from={0}
-        to={447}
+        to={9 * 60 * 60}
         value={lightsOnTime}
         onChange={setLightsOnTime}
       />
       <VerticalRangeSlider
-        from={919}
-        to={24 * 60}
+        from={17 * 60 * 60}
+        to={24 * 60 * 60}
         value={lightsOffTime}
         onChange={setLightsOffTime}
       />

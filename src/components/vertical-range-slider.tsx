@@ -8,8 +8,8 @@ interface Props {
 }
 
 export default ({ from, to, value, onChange }: Props) => {
-  const onSlide = (e) => {
-    onChange(e.target.value);
+  const onSlide = ({ target: { value } }) => {
+    onChange(parseInt(value));
   };
 
   return (
@@ -19,7 +19,7 @@ export default ({ from, to, value, onChange }: Props) => {
         min={from}
         max={to}
         defaultValue={value}
-        step="1"
+        step="60"
         onChange={onSlide}
       />
     </div>
