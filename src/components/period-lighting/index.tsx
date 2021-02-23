@@ -16,7 +16,7 @@ export interface Props {
 const DAY_START = 0;
 const DAY_END = 24 * 60 * 60;
 
-const seriesToNumbers = (data: Day[], moment: Moment): number[] =>
+const seriesToNumbers = (data: Partial<Day>[], moment: Moment): number[] =>
   map(data, day => (isNumber(moment) ? moment : timeToSeconds(day[moment])));
 
 export default ({ data, areas }: Props) => {

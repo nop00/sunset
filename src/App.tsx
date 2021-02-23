@@ -5,6 +5,7 @@ import "./styles.css";
 import { x } from "@xstyled/styled-components";
 import { map, split, join } from "lodash";
 import VerticalRangeSlider from "./components/vertical-range-slider";
+import { secondsToTime } from "./utils/time";
 
 const SUMMER = new Date("2021-03-28");
 const WINTER = new Date("2021-10-31");
@@ -31,8 +32,6 @@ export default () => {
   const [lightsOnTime, setLightsOnTime] = useState(5 * 60 * 60);
   const [lightsOffTime, setLightsOffTime] = useState(22 * 60 * 60);
 
-  console.log(lightsOnTime, lightsOffTime);
-
   return (
     <>
       <VerticalRangeSlider
@@ -47,8 +46,8 @@ export default () => {
         value={lightsOffTime}
         onChange={setLightsOffTime}
       />
-      <div>Allumage : {lightsOnTime}</div>
-      <div>Extinction : {lightsOffTime}</div>
+      <div>Allumage : {secondsToTime(lightsOnTime)}</div>
+      <div>Extinction : {secondsToTime(lightsOffTime)}</div>
       <x.div
         w={800}
         h={500}

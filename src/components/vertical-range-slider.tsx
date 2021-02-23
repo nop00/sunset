@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default ({ from, to, value, onChange }: Props) => {
-  const onSlide = ({ target: { value } }) => {
+  const onSlide = ({ target: { value } }: { target: { value: string } }) => {
     onChange(parseInt(value));
   };
 
