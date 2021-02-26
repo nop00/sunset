@@ -1,12 +1,12 @@
 import React from "react";
-import Component, { Props } from ".";
+import PeriodLighting from ".";
 import { Story, Meta } from "@storybook/react/types-6-0";
 import data from "../../../data/ephemeris.json";
 import { take } from "lodash";
 
 export default {
   title: "Period Lighting",
-  component: Component,
+  component: PeriodLighting,
   args: {
     data: take(data, 50),
     areas: [
@@ -18,6 +18,8 @@ export default {
   }
 } as Meta;
 
-const Template: Story<Props> = args => <Component {...args} />;
+const Template: Story<React.ComponentProps<typeof PeriodLighting>> = args => (
+  <PeriodLighting {...args} />
+);
 
 export const Basic = Template.bind({});

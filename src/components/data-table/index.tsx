@@ -1,6 +1,7 @@
 import React from "react";
+import Cyclists from "../cyclists";
 
-export interface IProps {
+interface IProps {
   currentLightingTime: number;
   newLightingTime: number;
 }
@@ -25,10 +26,11 @@ const toQuantity = (amount: number) =>
 const getAnnualCost = (lightingTime: number) =>
   (INSTALLED_POWER * COST_PER_KWH * lightingTime) / 1000;
 
-const Component = ({ currentLightingTime, newLightingTime }: IProps) => {
+const DataTable = ({ currentLightingTime, newLightingTime }: IProps) => {
   const currentAnnualCost = getAnnualCost(currentLightingTime);
   const newAnnualCost = getAnnualCost(newLightingTime);
   const savings = currentAnnualCost - newAnnualCost;
+  const cyclists = INSTALLED_POWER / 200;
 
   return (
     <table>
@@ -57,11 +59,15 @@ const Component = ({ currentLightingTime, newLightingTime }: IProps) => {
           <tr>Économie réalisée</tr>
           <td>{toEuros(savings)}</td>
         </tr>
+        <tr>
+          <tr>Équivalent cyclistes</tr>
+          <td>
+            <Cyclists amount={cyclists} />
+          </td>
+        </tr>
       </tbody>
     </table>
   );
 };
 
-Component.displayName = "Data table";
-
-export default Component;
+export default DataTable;

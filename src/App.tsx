@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Ephemeris from "./components/ephemeris";
+import VerticalRangeSlider from "./components/vertical-range-slider";
 import data from "../data/ephemeris.json";
 import "./styles.css";
 import { x } from "@xstyled/styled-components";
 import { map, split, join } from "lodash";
-import VerticalRangeSlider from "./components/vertical-range-slider";
 import { secondsToTime } from "./utils/time";
 
 const SUMMER = new Date("2021-03-28");

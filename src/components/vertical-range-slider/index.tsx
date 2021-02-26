@@ -7,7 +7,7 @@ interface Props {
   onChange: (event: any) => void;
 }
 
-export default ({ from, to, value, onChange }: Props) => {
+const VerticalRangeSlider = ({ from, to, value, onChange }: Props) => {
   const onSlide = ({ target: { value } }: { target: { value: string } }) => {
     onChange(parseInt(value));
   };
@@ -25,3 +25,5 @@ export default ({ from, to, value, onChange }: Props) => {
     </div>
   );
 };
+
+export default VerticalRangeSlider;

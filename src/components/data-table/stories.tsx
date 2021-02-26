@@ -1,10 +1,10 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react/types-6-0";
-import Component, { IProps } from ".";
+import DataTable from ".";
 
 export default {
-  title: Component.displayName,
-  component: Component,
+  title: DataTable.displayName,
+  component: DataTable,
   args: { currentLightingTime: 4100, newLightingTime: 1515 },
   argTypes: {
     currentLightingTime: { control: { type: null, min: 0, max: 4100 } },
@@ -12,5 +12,7 @@ export default {
   }
 } as Meta;
 
-export const Basic: Story<IProps> = args => <Component {...args} />;
+export const Basic: Story<React.ComponentProps<typeof DataTable>> = args => (
+  <DataTable {...args} />
+);
 Basic.storyName = "🔧 Basic";

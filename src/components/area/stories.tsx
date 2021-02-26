@@ -1,5 +1,5 @@
 import React from "react";
-import Area, { Props } from ".";
+import Area from ".";
 import { Story, Meta } from "@storybook/react/types-6-0";
 
 export default {
@@ -9,7 +9,7 @@ export default {
   argTypes: { color: { control: { type: "color" } } }
 } as Meta;
 
-const Template: Story<Props> = args => (
+const Template: Story<React.ComponentProps<typeof Area>> = args => (
   <svg viewBox="0 0 4 10" width="100%" height="100%" preserveAspectRatio="none">
     <Area {...args} />
   </svg>

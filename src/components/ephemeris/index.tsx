@@ -3,7 +3,7 @@ import { x } from "@xstyled/styled-components";
 import { Day, Moment } from "../../types";
 import PeriodLighting from "../period-lighting";
 
-export interface Props {
+interface Props {
   data: Day[];
   lightsOnTime: Moment;
   lightsOffTime: Moment;
@@ -17,7 +17,7 @@ const NATURAL_AREAS: { from: Moment; to: Moment; color: string }[] = [
   { from: "sunset", to: "civset", color: "lightblue" }
 ];
 
-export default ({ data, lightsOnTime, lightsOffTime }: Props) => {
+const Ephemeris = ({ data, lightsOnTime, lightsOffTime }: Props) => {
   const [xPos, setXPos] = useState(0);
   const overlay = useRef(undefined);
 
@@ -54,3 +54,5 @@ export default ({ data, lightsOnTime, lightsOffTime }: Props) => {
     </x.div>
   );
 };
+
+export default Ephemeris;

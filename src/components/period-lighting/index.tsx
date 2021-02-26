@@ -4,7 +4,7 @@ import Area from "../area";
 import { map, isNumber, size } from "lodash";
 import { timeToSeconds } from "../../utils/time";
 
-export interface Props {
+interface Props {
   data: Day[];
   areas: {
     from: Moment;
@@ -19,7 +19,7 @@ const DAY_END = 24 * 60 * 60;
 const seriesToNumbers = (data: Partial<Day>[], moment: Moment): number[] =>
   map(data, day => (isNumber(moment) ? moment : timeToSeconds(day[moment])));
 
-export default ({ data, areas }: Props) => {
+const PeriodLighting = ({ data, areas }: Props) => {
   const viewboxWidth = size(data) - 1;
 
   return (
@@ -37,3 +37,5 @@ export default ({ data, areas }: Props) => {
     </svg>
   );
 };
+
+export default PeriodLighting;
