@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Ephemeris from "./components/ephemeris";
 import VerticalRangeSlider from "./components/vertical-range-slider";
+import DataTable from "./components/data-table";
 import data from "../data/ephemeris.json";
 import "./styles.css";
 import { x } from "@xstyled/styled-components";
@@ -20,6 +21,7 @@ export default () => {
     const curDay = new Date(day.date);
     if (curDay > SUMMER && curDay < WINTER) {
       return {
+        date: day.date,
         sunrise: subtractAnHour(day.sunrise),
         sunset: subtractAnHour(day.sunset),
         civrise: subtractAnHour(day.civrise),
@@ -61,6 +63,8 @@ export default () => {
           lightsOffTime={lightsOffTime}
         />
       </x.div>
+
+      <DataTable newLightingTime={3500} />
     </>
   );
 };

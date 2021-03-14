@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, MutableRefObject } from "react";
 import { x } from "@xstyled/styled-components";
 import { Day, Moment } from "../../types";
 import PeriodLighting from "../period-lighting";
@@ -19,10 +19,17 @@ const NATURAL_AREAS: { from: Moment; to: Moment; color: string }[] = [
 
 const Ephemeris = ({ data, lightsOnTime, lightsOffTime }: Props) => {
   const [xPos, setXPos] = useState(0);
-  const overlay = useRef(undefined);
+  const overlay = useRef<HTMLDivElement>(null) as MutableRefObject<
+    HTMLDivElement
+  >;
 
-  const handleMouseMove = (e: { screenX: React.SetStateAction<number> }) =>
-    overlay && setXPos(e.screenX - overlay.current.getBoundingClientRect().x);
+  const handleMouseMove = (e: { screenX: React.SetStateAction<number> }) => {
+    if (overlay.current !== undefined) {
+      setXPos(
+        (e.screenX as number) - overlay.current.getBoundingClientRect().x
+      );
+    }
+  };
 
   const areasWithLighting = [
     { from: 0, to: DAY_DURATION, color: "midnightblue" },
