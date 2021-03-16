@@ -27,7 +27,7 @@ const PeriodLighting = ({ data, areas }: Props) => {
       viewBox={`0 ${DAY_START} ${viewboxWidth} ${DAY_END}`}
       style={{ width: "100%", height: "100%" }}
       preserveAspectRatio="none"
-      transform="scale(-1)"
+      transform="scale(1, -1)"
     >
       {map(areas, ({ from, to, color }, i) => {
         const _from = seriesToNumbers(data, from);

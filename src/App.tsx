@@ -5,15 +5,20 @@ import DataTable from "./components/data-table";
 import data from "../data/ephemeris.json";
 import "./styles.css";
 import { x } from "@xstyled/styled-components";
-import { map, split, join } from "lodash";
+import { map, split, join, random } from "lodash";
 import { secondsToTime } from "./utils/time";
 
 const SUMMER = new Date("2021-03-28");
 const WINTER = new Date("2021-10-31");
 
-const subtractAnHour = (time: string) => {
+const minOnTime = 0; // Minuit
+const maxOnTime = 9 * 60 * 60; // 9h
+const minOffTime = 17 * 60 * 60; // 17h
+const maxOffTime = 24 * 60 * 60; // Minuit
+
+const offsetTime = (time: string) => {
   const splitTime = split(time, ":");
-  return join([+splitTime[0] - 1, splitTime[1], splitTime[2]], ":");
+  return join([+splitTime[0] + 1, splitTime[1], splitTime[2]], ":");
 };
 
 export default () => {
@@ -22,29 +27,33 @@ export default () => {
     if (curDay > SUMMER && curDay < WINTER) {
       return {
         date: day.date,
-        sunrise: subtractAnHour(day.sunrise),
-        sunset: subtractAnHour(day.sunset),
-        civrise: subtractAnHour(day.civrise),
-        civset: subtractAnHour(day.civset)
+        sunrise: offsetTime(day.sunrise),
+        sunset: offsetTime(day.sunset),
+        civrise: offsetTime(day.civrise),
+        civset: offsetTime(day.civset)
       };
     }
     return day;
   });
 
-  const [lightsOnTime, setLightsOnTime] = useState(5 * 60 * 60);
-  const [lightsOffTime, setLightsOffTime] = useState(22 * 60 * 60);
+  const [lightsOnTime, setLightsOnTime] = useState(
+    random(minOnTime, maxOnTime)
+  );
+  const [lightsOffTime, setLightsOffTime] = useState(
+    random(minOffTime, maxOffTime)
+  );
 
   return (
     <>
       <VerticalRangeSlider
-        from={0}
-        to={9 * 60 * 60}
+        from={minOnTime}
+        to={maxOnTime}
         value={lightsOnTime}
         onChange={setLightsOnTime}
       />
       <VerticalRangeSlider
-        from={17 * 60 * 60}
-        to={24 * 60 * 60}
+        from={minOffTime}
+        to={maxOffTime}
         value={lightsOffTime}
         onChange={setLightsOffTime}
       />
