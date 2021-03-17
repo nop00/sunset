@@ -1,7 +1,8 @@
 import React, { useState, useRef, MutableRefObject } from "react";
 import { x } from "@xstyled/styled-components";
 import { Day, Moment } from "../../types";
-import PeriodLighting from "../period-lighting";
+import { PeriodLighting } from "../period-lighting";
+import { DAY_DURATION } from "../../constants";
 
 interface Props {
   data: Day[];
@@ -9,15 +10,13 @@ interface Props {
   lightsOffTime: Moment;
 }
 
-const DAY_DURATION = 24 * 60 * 60;
-
 const NATURAL_AREAS: { from: Moment; to: Moment; color: string }[] = [
   { from: "civrise", to: "sunrise", color: "lightblue" },
   { from: "sunrise", to: "sunset", color: "lightyellow" },
   { from: "sunset", to: "civset", color: "lightblue" }
 ];
 
-const Ephemeris = ({ data, lightsOnTime, lightsOffTime }: Props) => {
+export const Ephemeris = ({ data, lightsOnTime, lightsOffTime }: Props) => {
   const [xPos, setXPos] = useState(0);
   const overlay = useRef<HTMLDivElement>(null) as MutableRefObject<
     HTMLDivElement
@@ -61,5 +60,3 @@ const Ephemeris = ({ data, lightsOnTime, lightsOffTime }: Props) => {
     </x.div>
   );
 };
-
-export default Ephemeris;

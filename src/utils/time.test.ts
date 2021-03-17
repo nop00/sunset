@@ -1,4 +1,10 @@
-import { secondsToTime, timeToSeconds } from "./time";
+import {
+  readableTime,
+  secondsToTime,
+  timeToSeconds,
+  yearlyLightingTime
+} from "./time";
+import data from "../../data/ephemeris.json";
 
 describe("timeToSeconds", () => {
   test("random value", () => {
@@ -15,5 +21,44 @@ describe("secondsToTime", () => {
   });
   test("null value", () => {
     expect(secondsToTime(0)).toEqual("00:00:00");
+  });
+});
+
+describe("yearlyLightingTime", () => {
+  test("no lighting", () => {
+    expect(
+      yearlyLightingTime(
+        data,
+        timeToSeconds("12:00:00"),
+        timeToSeconds("12:00:00")
+      )
+    ).toEqual(0);
+  });
+  test("max lighting", () => {
+    expect(
+      yearlyLightingTime(
+        data,
+        timeToSeconds("00:00:00"),
+        timeToSeconds("24:00:00")
+      )
+    ).toEqual(4104.24);
+  });
+  test("partial lighting", () => {
+    expect(
+      yearlyLightingTime(
+        data,
+        timeToSeconds("05:00:00"),
+        timeToSeconds("23:00:00")
+      )
+    ).toEqual(1940.35);
+  });
+});
+
+describe("readableTime", () => {
+  test("with string", () => {
+    expect(readableTime("05:32:03")).toEqual("5h32");
+  });
+  test("with number", () => {
+    expect(readableTime(17 * 60 * 60 + 32 * 60 + 3)).toEqual("17h32");
   });
 });

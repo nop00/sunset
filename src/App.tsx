@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Ephemeris from "./components/ephemeris";
-import VerticalRangeSlider from "./components/vertical-range-slider";
-import DataTable from "./components/data-table";
+import { Ephemeris } from "./components/ephemeris";
+import { VerticalRangeSlider } from "./components/vertical-range-slider";
+import { Explanation } from "./components/explanation";
 import data from "../data/ephemeris.json";
 import "./styles.css";
 import { x } from "@xstyled/styled-components";
 import { map, split, join, random } from "lodash";
-import { secondsToTime } from "./utils/time";
+import { readableTime, yearlyLightingTime } from "./utils/time";
 
 const SUMMER = new Date("2021-03-28");
 const WINTER = new Date("2021-10-31");
@@ -43,6 +43,8 @@ export default () => {
     random(minOffTime, maxOffTime)
   );
 
+  const lightingTime = yearlyLightingTime(data, lightsOnTime, lightsOffTime);
+
   return (
     <>
       <VerticalRangeSlider
@@ -57,8 +59,12 @@ export default () => {
         value={lightsOffTime}
         onChange={setLightsOffTime}
       />
-      <div>Allumage : {secondsToTime(lightsOnTime)}</div>
-      <div>Extinction : {secondsToTime(lightsOffTime)}</div>
+      <div>Allumage : {readableTime(lightsOnTime)}</div>
+      <div>Extinction : {readableTime(lightsOffTime)}</div>
+      <div style={{ fontSize: "2em", fontWeight: "bold", color: "red" }}>
+        IL FAUT INVERSER LES AIRES D'ALLUMAGE !!! LE JAUNE DOIT COLLER AU
+        CRÉPUSCULE ET NON À MINUIT.
+      </div>
       <x.div
         w={800}
         h={500}
@@ -73,7 +79,7 @@ export default () => {
         />
       </x.div>
 
-      <DataTable newLightingTime={3500} />
+      <Explanation newLightingTime={lightingTime} />
     </>
   );
 };

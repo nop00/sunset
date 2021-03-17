@@ -12,11 +12,9 @@ const getPoints = (series: number[], reversePoints?: boolean): string => {
   return join(reversePoints ? reverse(points) : points, " ");
 };
 
-const Area = ({ from, to, color = "blue" }: Props) => {
+export const Area = ({ from, to, color = "blue" }: Props) => {
   const fromSeries = getPoints(from);
   const toSeries = getPoints(to, true);
 
   return <polygon points={`${fromSeries} ${toSeries}`} fill={color} />;
 };
-
-export default Area;

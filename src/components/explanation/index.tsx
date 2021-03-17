@@ -1,15 +1,16 @@
 import React from "react";
+import {
+  CURRENT_LIGHTING_TIME,
+  INSTALLED_POWER,
+  COST_PER_WH,
+  POPULATION,
+  CYCLIST_HOURLY_PRODUCTION,
+  HOUSEHOLD_YEARLY_CONSUMPTION
+} from "../../constants";
 
 interface IProps {
   newLightingTime: number;
 }
-
-const INSTALLED_POWER = 58.488;
-const COST_PER_WH = 0.1485;
-const HOUSEHOLD_YEARLY_CONSUMPTION = 4700;
-const CYCLIST_HOURLY_PRODUCTION = 0.2;
-const POPULATION = 3141;
-const CURRENT_LIGHTING_TIME = 4100;
 
 const toEuros = (amount: number, precision: number = 0) =>
   new Intl.NumberFormat("fr-FR", {
@@ -25,7 +26,7 @@ const toQuantity = (amount: number, precision: number = 0) =>
     maximumFractionDigits: precision
   }).format(amount);
 
-const DataTable = ({ newLightingTime }: IProps) => {
+export const Explanation = ({ newLightingTime }: IProps) => {
   const energySaving =
     (CURRENT_LIGHTING_TIME - newLightingTime) * INSTALLED_POWER;
   const moneySaving = energySaving * COST_PER_WH;
@@ -124,5 +125,3 @@ const DataTable = ({ newLightingTime }: IProps) => {
     </div>
   );
 };
-
-export default DataTable;

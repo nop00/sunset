@@ -1,6 +1,6 @@
 import React from "react";
 import { Day, Moment } from "../../types";
-import Area from "../area";
+import { Area } from "../area";
 import { map, isNumber, size } from "lodash";
 import { timeToSeconds } from "../../utils/time";
 
@@ -16,10 +16,14 @@ interface Props {
 const DAY_START = 0;
 const DAY_END = 24 * 60 * 60;
 
-const seriesToNumbers = (data: Partial<Day>[], moment: Moment): number[] =>
-  map(data, day => (isNumber(moment) ? moment : timeToSeconds(day[moment])));
+const seriesToNumbers = (data: Day[], moment: Moment): number[] =>
+  map(
+    data,
+    day =>
+      isNumber(moment) ? moment : timeToSeconds(day[moment] || "00:00:00")
+  );
 
-const PeriodLighting = ({ data, areas }: Props) => {
+export const PeriodLighting = ({ data, areas }: Props) => {
   const viewboxWidth = size(data) - 1;
 
   return (
@@ -37,5 +41,3 @@ const PeriodLighting = ({ data, areas }: Props) => {
     </svg>
   );
 };
-
-export default PeriodLighting;
