@@ -4,9 +4,9 @@ import { VerticalRangeSlider } from "./components/vertical-range-slider";
 import { Explanation } from "./components/explanation";
 import data from "../data/ephemeris.json";
 import "./styles.css";
-import { x } from "@xstyled/styled-components";
 import { map, split, join, random } from "lodash";
 import { readableTime, yearlyLightingTime } from "./utils/time";
+import styled from "styled-components";
 
 const SUMMER = new Date("2021-03-28");
 const WINTER = new Date("2021-10-31");
@@ -20,6 +20,26 @@ const offsetTime = (time: string) => {
   const splitTime = split(time, ":");
   return join([+splitTime[0] + 1, splitTime[1], splitTime[2]], ":");
 };
+
+const SliderOn = styled(VerticalRangeSlider)`
+  position: absolute;
+  left: 0;
+  bottom: -69px;
+`;
+
+const SliderOff = styled(VerticalRangeSlider)`
+  position: absolute;
+  left: 0;
+  top: -16px;
+`;
+
+const EphemerisContainer = styled.div`
+  width: 800px;
+  height: 500px;
+  position: relative;
+  margin: 50px auto;
+  padding-left: 36px;
+`;
 
 export default () => {
   const dataWithSavings = map(data, day => {
@@ -47,37 +67,34 @@ export default () => {
 
   return (
     <>
-      <VerticalRangeSlider
-        from={minOnTime}
-        to={maxOnTime}
-        value={lightsOnTime}
-        onChange={setLightsOnTime}
-      />
-      <VerticalRangeSlider
-        from={minOffTime}
-        to={maxOffTime}
-        value={lightsOffTime}
-        onChange={setLightsOffTime}
-      />
-      <div>Allumage : {readableTime(lightsOnTime)}</div>
-      <div>Extinction : {readableTime(lightsOffTime)}</div>
       <div style={{ fontSize: "2em", fontWeight: "bold", color: "red" }}>
         IL FAUT INVERSER LES AIRES D'ALLUMAGE !!! LE JAUNE DOIT COLLER AU
         CRÉPUSCULE ET NON À MINUIT.
       </div>
-      <x.div
-        w={800}
-        h={500}
-        position="relative"
-        m="50px auto"
-        overflow="hidden"
-      >
+
+      <EphemerisContainer>
+        <SliderOn
+          from={minOnTime}
+          to={maxOnTime}
+          value={lightsOnTime}
+          height={200}
+          onChange={setLightsOnTime}
+        />
+        Allumage : {readableTime(lightsOnTime)}
+        <SliderOff
+          from={minOffTime}
+          to={maxOffTime}
+          value={lightsOffTime}
+          height={180}
+          onChange={setLightsOffTime}
+        />
+        Extinction : {readableTime(lightsOffTime)}
         <Ephemeris
           data={dataWithSavings}
           lightsOnTime={lightsOnTime}
           lightsOffTime={lightsOffTime}
         />
-      </x.div>
+      </EphemerisContainer>
 
       <Explanation newLightingTime={lightingTime} />
     </>

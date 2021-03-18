@@ -1,5 +1,5 @@
 import React from "react";
-import Area from ".";
+import { Area } from ".";
 import { Story, Meta } from "@storybook/react/types-6-0";
 
 export default {

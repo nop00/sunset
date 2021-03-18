@@ -1,5 +1,5 @@
 import React from "react";
-import Ephemeris from ".";
+import { Ephemeris } from ".";
 import { Story, Meta } from "@storybook/react/types-6-0";
 import data from "../../../data/ephemeris.json";
 

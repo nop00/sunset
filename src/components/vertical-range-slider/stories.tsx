@@ -1,12 +1,12 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react/types-6-0";
-import VerticalRangeSlider from ".";
+import { VerticalRangeSlider } from ".";
 
 export default {
   title: "VerticalRangeSlider",
   component: VerticalRangeSlider,
-  args: {},
-  argTypes: {}
+  args: { from: 0, to: 1000, value: 500 },
+  argTypes: { onChange: {} }
 } as Meta;
 
 export const Basic: Story<

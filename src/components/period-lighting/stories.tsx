@@ -1,5 +1,5 @@
 import React from "react";
-import PeriodLighting from ".";
+import { PeriodLighting } from ".";
 import { Story, Meta } from "@storybook/react/types-6-0";
 import data from "../../../data/ephemeris.json";
 import { take } from "lodash";

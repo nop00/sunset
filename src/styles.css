@@ -3,21 +3,6 @@ body {
   font-family: sans-serif;
 }
 
-.slider-wrapper {
-  display: inline-block;
-  width: 20px;
-  height: 150px;
-  padding: 0;
-}
-
-.slider-wrapper input {
-  width: 150px;
-  height: 20px;
-  margin: 0;
-  transform-origin: 75px 75px;
-  transform: rotate(-90deg);
-}
-
 .sentence {
   line-height: 1.5em;
 }
@@ -32,4 +17,18 @@ body {
 
 .sources {
   font-size: 80%;
+}
+
+.lights-on-time,
+.lights-off-time {
+  position: absolute;
+  left: 0;
+}
+
+.lights-on-time {
+  bottom: 0;
+}
+
+.lights-off-time {
+  top: 0;
 }
