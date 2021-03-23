@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import styled from "styled-components";
 import {
   CURRENT_LIGHTING_TIME,
   INSTALLED_POWER,
@@ -26,6 +27,43 @@ const toQuantity = (amount: number, precision: number = 0) =>
     maximumFractionDigits: precision
   }).format(amount);
 
+const Sentence = styled.div`
+  line-height: 1.5em;
+  strong {
+    border-radius: 4px;
+    background-color: greenyellow;
+    padding: 0 4px;
+    font-weight: normal;
+    font-size: 110%;
+    white-space: nowrap;
+  }
+`;
+
+const Sources = styled.dl`
+  border: 1px solid grey;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  dd + dt {
+    margin-top: 1em;
+  }
+`;
+
+const Button = styled.div`
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  cursor: pointer;
+  font-family: sans-serif;
+  text-align: center;
+  margin-top: 2em;
+`;
+
+const Big = styled.div`
+  font-size: 200%;
+  text-align: center;
+`;
+
 export const Explanation = ({ newLightingTime }: IProps) => {
   const energySaving =
     (CURRENT_LIGHTING_TIME - newLightingTime) * INSTALLED_POWER;
@@ -33,17 +71,22 @@ export const Explanation = ({ newLightingTime }: IProps) => {
   const moneySavingPerCapita = moneySaving / POPULATION;
   const cyclistsSaving = energySaving / CYCLIST_HOURLY_PRODUCTION;
   const householdsSaving = energySaving / HOUSEHOLD_YEARLY_CONSUMPTION;
+  const [showSources, toggleShowSources] = useState(false);
+
+  const handleClickSources = () => {
+    toggleShowSources(!showSources);
+  };
 
   return (
     <div>
-      <div style={{ fontSize: "200%", textAlign: "center" }}>
+      <Big>
         {energySaving === 0 ? (
           <span>
             Bougez les curseurs pour voir quelles économies la commune pourrait
             réaliser en éteignant l'éclairage public une partie de la nuit 🌌.
           </span>
         ) : (
-          <span className="sentence">
+          <Sentence>
             Avec ces réglages,
             <br />
             la commune économiserait{" "}
@@ -61,13 +104,15 @@ export const Explanation = ({ newLightingTime }: IProps) => {
             soit{" "}
             <strong>{toEuros(moneySavingPerCapita, 2)} par Capellois</strong> et
             par an.
-          </span>
+          </Sentence>
         )}
-      </div>
+      </Big>
 
-      <div className="sources">
-        <h3>Sources</h3>
-        <dl>
+      <Button onClick={handleClickSources}>
+        {showSources ? "Cacher" : "Montrer"} les sources
+      </Button>
+      {showSources && (
+        <Sources>
           <dt>
             Puissance électrique installée ({toQuantity(INSTALLED_POWER)}
             &#8239;kilowatts), durée d'éclairage annuel (
@@ -120,8 +165,8 @@ export const Explanation = ({ newLightingTime }: IProps) => {
               https://www.insee.fr/fr/statistiques/1405599?geo=COM-60142
             </a>
           </dd>
-        </dl>
-      </div>
+        </Sources>
+      )}
     </div>
   );
 };

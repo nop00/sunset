@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { Day, Moment } from "../../types";
 import { Area } from "../area";
 import { map, isNumber, size } from "lodash";
@@ -23,13 +24,17 @@ const seriesToNumbers = (data: Day[], moment: Moment): number[] =>
       isNumber(moment) ? moment : timeToSeconds(day[moment] || "00:00:00")
   );
 
+const Svg = styled.svg`
+  width: 100%;
+  height: 100%;
+`;
+
 export const PeriodLighting = ({ data, areas }: Props) => {
   const viewboxWidth = size(data) - 1;
 
   return (
-    <svg
+    <Svg
       viewBox={`0 ${DAY_START} ${viewboxWidth} ${DAY_END}`}
-      style={{ width: "100%", height: "100%" }}
       preserveAspectRatio="none"
       transform="scale(1, -1)"
     >
@@ -38,6 +43,6 @@ export const PeriodLighting = ({ data, areas }: Props) => {
         const _to = seriesToNumbers(data, to);
         return <Area key={i} from={_from} to={_to} color={color} />;
       })}
-    </svg>
+    </Svg>
   );
 };

@@ -3,10 +3,9 @@ import { Ephemeris } from "./components/ephemeris";
 import { VerticalRangeSlider } from "./components/vertical-range-slider";
 import { Explanation } from "./components/explanation";
 import data from "../data/ephemeris.json";
-import "./styles.css";
 import { map, split, join, random } from "lodash";
 import { readableTime, yearlyLightingTime } from "./utils/time";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 const SUMMER = new Date("2021-03-28");
 const WINTER = new Date("2021-10-31");
@@ -20,6 +19,13 @@ const offsetTime = (time: string) => {
   const splitTime = split(time, ":");
   return join([+splitTime[0] + 1, splitTime[1], splitTime[2]], ":");
 };
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 12px;
+    font-family: sans-serif;
+  }
+`;
 
 const SliderOn = styled(VerticalRangeSlider)`
   position: absolute;
@@ -39,6 +45,12 @@ const EphemerisContainer = styled.div`
   position: relative;
   margin: 50px auto;
   padding-left: 36px;
+`;
+
+const Warning = styled.div`
+  font-size: 2em;
+  font-weight: bold;
+  color: red;
 `;
 
 export default () => {
@@ -67,10 +79,11 @@ export default () => {
 
   return (
     <>
-      <div style={{ fontSize: "2em", fontWeight: "bold", color: "red" }}>
+      <GlobalStyle />
+      <Warning>
         IL FAUT INVERSER LES AIRES D'ALLUMAGE !!! LE JAUNE DOIT COLLER AU
         CRÉPUSCULE ET NON À MINUIT.
-      </div>
+      </Warning>
 
       <EphemerisContainer>
         <SliderOn
