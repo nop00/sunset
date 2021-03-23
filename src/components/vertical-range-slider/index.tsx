@@ -30,6 +30,7 @@ const Input = styled.input<{ $height: number }>`
   height: 32px;
   transform-origin: 75px 75px;
   transform: rotate(-90deg);
+  background-color: transparent;
   :focus {
     outline: none;
   }
@@ -48,6 +49,7 @@ const Input = styled.input<{ $height: number }>`
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -12px;
+    margin-left: 2px;
   }
   :focus::-webkit-slider-runnable-track {
     background: ${trackBg};
@@ -65,6 +67,7 @@ const Input = styled.input<{ $height: number }>`
     background: ${thumbBg};
     border-radius: 100%;
     cursor: pointer;
+    margin-left: 2px;
   }
   ::-ms-track {
     width: 100%;
@@ -88,6 +91,7 @@ const Input = styled.input<{ $height: number }>`
     background: ${thumbBg};
     border-radius: 100%;
     cursor: pointer;
+    margin-left: 2px;
   }
   :focus::-ms-fill-lower {
     background: #3071a9;
