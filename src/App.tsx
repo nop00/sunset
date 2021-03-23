@@ -47,12 +47,6 @@ const EphemerisContainer = styled.div`
   padding-left: 36px;
 `;
 
-const Warning = styled.div`
-  font-size: 2em;
-  font-weight: bold;
-  color: red;
-`;
-
 export default () => {
   const dataWithSavings = map(data, day => {
     const curDay = new Date(day.date);
@@ -80,11 +74,6 @@ export default () => {
   return (
     <>
       <GlobalStyle />
-      <Warning>
-        IL FAUT INVERSER LES AIRES D'ALLUMAGE !!! LE JAUNE DOIT COLLER AU
-        CRÉPUSCULE ET NON À MINUIT.
-      </Warning>
-
       <EphemerisContainer>
         <SliderOn
           from={minOnTime}
