@@ -19,7 +19,7 @@ const thumbBg = "#FFF";
 const Wrapper = styled.div<{ $height: number }>`
   display: inline-block;
   width: 32px;
-  height: ${props => props.$height};
+  height: ${props => props.$height}px;
   padding: 0;
 `;
 
@@ -105,23 +105,25 @@ export const VerticalRangeSlider = ({
   from,
   to,
   value,
-  height,
+  height = 150,
   onChange,
   className
 }: Props) => {
+  // Height must include thumb size
+  const _height = height + 32;
   const onSlide = ({ target: { value } }: { target: { value: string } }) => {
     onChange(parseInt(value));
   };
 
   return (
-    <Wrapper className={className} $height={height}>
+    <Wrapper className={className} $height={_height}>
       <Input
         type="range"
         min={from}
         max={to}
         defaultValue={value}
         step="60"
-        $height={height}
+        $height={_height}
         onChange={onSlide}
       />
     </Wrapper>

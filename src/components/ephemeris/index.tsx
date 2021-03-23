@@ -18,8 +18,8 @@ const NATURAL_AREAS: { from: Moment; to: Moment; color: string }[] = [
 export const Ephemeris = ({ data, lightsOnTime, lightsOffTime }: Props) => {
   const areasWithLighting = [
     { from: 0, to: DAY_DURATION, color: "midnightblue" },
-    { from: lightsOnTime, to: "sunset" as Moment, color: "yellow" },
-    { from: "sunrise" as Moment, to: lightsOffTime, color: "yellow" },
+    { from: lightsOnTime, to: "sunrise" as Moment, color: "yellow" },
+    { from: "sunset" as Moment, to: lightsOffTime, color: "yellow" },
     ...NATURAL_AREAS
   ];
 

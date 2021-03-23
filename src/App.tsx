@@ -27,21 +27,22 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const SliderOn = styled(VerticalRangeSlider)`
+const SliderMorning = styled(VerticalRangeSlider)`
   position: absolute;
   left: 0;
-  bottom: -69px;
+  bottom: -77px;
 `;
 
-const SliderOff = styled(VerticalRangeSlider)`
+const SliderEvening = styled(VerticalRangeSlider)`
   position: absolute;
   left: 0;
-  top: -16px;
+  top: 6px;
 `;
 
 const EphemerisContainer = styled.div`
-  width: 800px;
-  height: 500px;
+  width: 100%;
+  max-width: 800px;
+  height: 480px;
   position: relative;
   margin: 50px auto;
   padding-left: 36px;
@@ -75,19 +76,19 @@ export default () => {
     <>
       <GlobalStyle />
       <EphemerisContainer>
-        <SliderOn
+        <SliderMorning
           from={minOnTime}
           to={maxOnTime}
           value={lightsOnTime}
-          height={200}
+          height={180}
           onChange={setLightsOnTime}
         />
         Allumage : {readableTime(lightsOnTime)}
-        <SliderOff
+        <SliderEvening
           from={minOffTime}
           to={maxOffTime}
           value={lightsOffTime}
-          height={180}
+          height={140}
           onChange={setLightsOffTime}
         />
         Extinction : {readableTime(lightsOffTime)}
