@@ -27,16 +27,16 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const SliderMorning = styled(VerticalRangeSlider)`
+const SliderOn = styled(VerticalRangeSlider)`
   position: absolute;
   left: 0;
-  bottom: -77px;
+  bottom: -62px;
 `;
 
-const SliderEvening = styled(VerticalRangeSlider)`
+const SliderOff = styled(VerticalRangeSlider)`
   position: absolute;
   left: 0;
-  top: 6px;
+  top: -10px;
 `;
 
 const EphemerisContainer = styled.div`
@@ -46,6 +46,15 @@ const EphemerisContainer = styled.div`
   position: relative;
   margin: 50px auto;
   padding-left: 36px;
+`;
+
+const LightsTime = styled.div`
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+  strong {
+    font-size: 200%;
+  }
 `;
 
 export default () => {
@@ -75,30 +84,32 @@ export default () => {
   return (
     <>
       <GlobalStyle />
+      <LightsTime>
+        Allumage : <strong>{readableTime(lightsOnTime)}</strong>
+        <br />
+        Extinction : <strong>{readableTime(lightsOffTime)}</strong>
+      </LightsTime>
       <EphemerisContainer>
-        <SliderMorning
+        <SliderOn
           from={minOnTime}
           to={maxOnTime}
           value={lightsOnTime}
           height={180}
           onChange={setLightsOnTime}
         />
-        Allumage : {readableTime(lightsOnTime)}
-        <SliderEvening
+        <SliderOff
           from={minOffTime}
           to={maxOffTime}
           value={lightsOffTime}
           height={140}
           onChange={setLightsOffTime}
         />
-        Extinction : {readableTime(lightsOffTime)}
         <Ephemeris
           data={dataWithSavings}
           lightsOnTime={lightsOnTime}
           lightsOffTime={lightsOffTime}
         />
       </EphemerisContainer>
-
       <Explanation newLightingTime={lightingTime} />
     </>
   );
