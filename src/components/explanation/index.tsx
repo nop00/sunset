@@ -10,6 +10,8 @@ import {
 } from "../../constants";
 
 interface IProps {
+  onTime: string;
+  offTime: string;
   newLightingTime: number;
 }
 
@@ -36,6 +38,12 @@ const Sentence = styled.div`
     font-weight: normal;
     font-size: 110%;
     white-space: nowrap;
+  }
+  .stronger {
+    font-size: 1.2em;
+    font-weight: bolder;
+    background-color: deeppink;
+    color: white;
   }
 `;
 
@@ -64,9 +72,9 @@ const Big = styled.div`
   text-align: center;
 `;
 
-export const Explanation = ({ newLightingTime }: IProps) => {
+export const Explanation = ({ onTime, offTime, newLightingTime }: IProps) => {
   const energySaving =
-    (CURRENT_LIGHTING_TIME - newLightingTime) * INSTALLED_POWER;
+    Math.max(CURRENT_LIGHTING_TIME - newLightingTime, 0) * INSTALLED_POWER;
   const moneySaving = energySaving * COST_PER_WH;
   const moneySavingPerCapita = moneySaving / POPULATION;
   const cyclistsSaving = energySaving / CYCLIST_HOURLY_PRODUCTION;
@@ -80,32 +88,26 @@ export const Explanation = ({ newLightingTime }: IProps) => {
   return (
     <div>
       <Big>
-        {energySaving === 0 ? (
-          <span>
-            Bougez les curseurs pour voir quelles économies la commune pourrait
-            réaliser en éteignant l'éclairage public une partie de la nuit 🌌.
-          </span>
-        ) : (
-          <Sentence>
-            Avec ces réglages,
-            <br />
-            la commune économiserait{" "}
-            <strong>{toQuantity(energySaving)} kWh</strong> d'électricité,
-            <br />
-            c'est la consommation annuelle de{" "}
-            <strong>{toQuantity(householdsSaving)} foyers français 👨‍👩‍👧‍👦</strong>
-            <br />
-            ou l'énergie produite par{" "}
-            <strong>{toQuantity(cyclistsSaving)} cyclistes 🚴‍♀️</strong> en une
-            heure.
-            <br />
-            Cette économie représenterait{" "}
-            <strong>{toEuros(moneySaving)} 💶</strong>,<br />
-            soit{" "}
-            <strong>{toEuros(moneySavingPerCapita, 2)} par Capellois</strong> et
-            par an.
-          </Sentence>
-        )}
+        <Sentence>
+          En allumant l'éclairage public à <strong>{onTime}</strong> et en
+          l'éteignant à <strong>{offTime}</strong>,<br />
+          la commune économiserait{" "}
+          <strong>{toQuantity(energySaving)} kWh</strong> d'électricité,
+          <br />
+          c'est la consommation annuelle de{" "}
+          <strong>{toQuantity(householdsSaving)} foyers français 👨‍👩‍👧‍👦</strong>
+          <br />
+          ou l'énergie produite par{" "}
+          <strong>{toQuantity(cyclistsSaving)} cyclistes 🚴‍♀️</strong> en une
+          heure.
+          <br />
+          Cette économie représenterait{" "}
+          <strong className="stronger">{toEuros(moneySaving)} 💶</strong>,<br />
+          soit <strong>
+            {toEuros(moneySavingPerCapita, 2)} par Capellois
+          </strong>{" "}
+          et par an.
+        </Sentence>
       </Big>
 
       <Button onClick={handleClickSources}>

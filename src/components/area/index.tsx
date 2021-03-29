@@ -2,8 +2,8 @@ import React from "react";
 import { map, join, reverse } from "lodash";
 
 interface Props {
-  from: number[];
-  to: number[];
+  min: number[];
+  max: number[];
   color: string;
 }
 
@@ -12,9 +12,9 @@ const getPoints = (series: number[], reversePoints?: boolean): string => {
   return join(reversePoints ? reverse(points) : points, " ");
 };
 
-export const Area = ({ from, to, color = "blue" }: Props) => {
-  const fromSeries = getPoints(from);
-  const toSeries = getPoints(to, true);
+export const Area = ({ min, max, color = "blue" }: Props) => {
+  const fromSeries = getPoints(min);
+  const toSeries = getPoints(max, true);
 
   return <polygon points={`${fromSeries} ${toSeries}`} fill={color} />;
 };

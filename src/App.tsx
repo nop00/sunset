@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Ephemeris } from "./components/ephemeris";
-import { VerticalRangeSlider } from "./components/vertical-range-slider";
+import { RangeSlider } from "./components/range-slider";
 import { Explanation } from "./components/explanation";
 import data from "../data/ephemeris.json";
 import { map, split, join, random } from "lodash";
@@ -27,34 +27,18 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const SliderOn = styled(VerticalRangeSlider)`
-  position: absolute;
-  left: 0;
-  bottom: -62px;
-`;
-
-const SliderOff = styled(VerticalRangeSlider)`
-  position: absolute;
-  left: 0;
-  top: -10px;
+const Centerer = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
 `;
 
 const EphemerisContainer = styled.div`
-  width: 100%;
-  max-width: 800px;
-  height: 480px;
-  position: relative;
-  margin: 50px auto;
-  padding-left: 36px;
+  height: 400px;
 `;
 
-const LightsTime = styled.div`
-  margin: 0 auto;
-  max-width: 800px;
+const Order = styled.div`
   text-align: center;
-  strong {
-    font-size: 200%;
-  }
+  margin: 3em 0;
 `;
 
 export default () => {
@@ -72,45 +56,37 @@ export default () => {
     return day;
   });
 
-  const [lightsOnTime, setLightsOnTime] = useState(
-    random(minOnTime, maxOnTime)
-  );
-  const [lightsOffTime, setLightsOffTime] = useState(
-    random(minOffTime, maxOffTime)
-  );
+  const [lightingTime, setLightingTime] = useState<[number, number]>([
+    random(minOnTime / 300, maxOnTime / 300) * 300,
+    random(minOffTime / 300, maxOffTime / 300) * 300
+  ]);
 
-  const lightingTime = yearlyLightingTime(data, lightsOnTime, lightsOffTime);
+  const lightingDuration = yearlyLightingTime(
+    data,
+    lightingTime[0],
+    lightingTime[1]
+  );
 
   return (
-    <>
+    <Centerer>
       <GlobalStyle />
-      <LightsTime>
-        Allumage : <strong>{readableTime(lightsOnTime)}</strong>
-        <br />
-        Extinction : <strong>{readableTime(lightsOffTime)}</strong>
-      </LightsTime>
       <EphemerisContainer>
-        <SliderOn
-          from={minOnTime}
-          to={maxOnTime}
-          value={lightsOnTime}
-          height={180}
-          onChange={setLightsOnTime}
-        />
-        <SliderOff
-          from={minOffTime}
-          to={maxOffTime}
-          value={lightsOffTime}
-          height={140}
-          onChange={setLightsOffTime}
-        />
         <Ephemeris
           data={dataWithSavings}
-          lightsOnTime={lightsOnTime}
-          lightsOffTime={lightsOffTime}
+          lightsOnTime={lightingTime[0]}
+          lightsOffTime={lightingTime[1]}
         />
       </EphemerisContainer>
-      <Explanation newLightingTime={lightingTime} />
-    </>
+      <Order>
+        Bougez les curseurs pour voir quelles économies la commune pourrait
+        réaliser en éteignant l'éclairage public une partie de la nuit 🌌.
+      </Order>
+      <RangeSlider value={lightingTime} onChange={setLightingTime} />
+      <Explanation
+        onTime={readableTime(lightingTime[0])}
+        offTime={readableTime(lightingTime[1])}
+        newLightingTime={lightingDuration}
+      />
+    </Centerer>
   );
 };

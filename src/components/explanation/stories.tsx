@@ -5,9 +5,8 @@ import { Explanation } from ".";
 export default {
   title: "Explanation",
   component: Explanation,
-  args: { currentLightingTime: 4100, newLightingTime: 1515 },
+  args: { onTime: "5h", offTime: "22h", newLightingTime: 1515 },
   argTypes: {
-    currentLightingTime: { control: { type: null, min: 0, max: 4100 } },
     newLightingTime: { control: { type: "range", min: 0, max: 4100 } }
   }
 } as Meta;

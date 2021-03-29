@@ -41,7 +41,7 @@ export const PeriodLighting = ({ data, areas }: Props) => {
       {map(areas, ({ from, to, color }, i) => {
         const _from = seriesToNumbers(data, from);
         const _to = seriesToNumbers(data, to);
-        return <Area key={i} from={_from} to={_to} color={color} />;
+        return <Area key={i} min={_from} max={_to} color={color} />;
       })}
     </Svg>
   );
