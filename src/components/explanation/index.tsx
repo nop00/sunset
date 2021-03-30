@@ -68,7 +68,6 @@ const Button = styled.div`
 `;
 
 const Big = styled.div`
-  font-size: 200%;
   text-align: center;
 `;
 

@@ -33,7 +33,7 @@ const Centerer = styled.div`
 `;
 
 const EphemerisContainer = styled.div`
-  height: 400px;
+  height: 50vh;
 `;
 
 const Order = styled.div`
@@ -77,10 +77,7 @@ export default () => {
           lightsOffTime={lightingTime[1]}
         />
       </EphemerisContainer>
-      <Order>
-        Bougez les curseurs pour voir quelles économies la commune pourrait
-        réaliser en éteignant l'éclairage public une partie de la nuit 🌌.
-      </Order>
+      <Order>Bougez les curseurs pour changer les horaires d'allumage !</Order>
       <RangeSlider value={lightingTime} onChange={setLightingTime} />
       <Explanation
         onTime={readableTime(lightingTime[0])}
