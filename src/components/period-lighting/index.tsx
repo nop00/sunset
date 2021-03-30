@@ -81,7 +81,7 @@ export const PeriodLighting = ({ data, areas }: Props) => {
           const textX = (100 / 12) * i + 100 / 24 + "%";
           const textY = "50%";
           return (
-            <>
+            <g key={i}>
               <text
                 x={textX}
                 y={textY}
@@ -102,7 +102,7 @@ export const PeriodLighting = ({ data, areas }: Props) => {
                 strokeWidth={1}
                 stroke="rgba(0,0,0,.5)"
               />
-            </>
+            </g>
           );
         })}
       </Legend>

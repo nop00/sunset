@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Ephemeris } from "./components/ephemeris";
 import { RangeSlider } from "./components/range-slider";
 import { Explanation } from "./components/explanation";
+import { Legend } from "./components/legend";
 import data from "../data/ephemeris.json";
 import { map, split, join, random } from "lodash";
 import { readableTime, yearlyLightingTime } from "./utils/time";
@@ -38,7 +39,7 @@ const EphemerisContainer = styled.div`
 
 const Order = styled.div`
   text-align: center;
-  margin: 3em 0;
+  margin: 1em 0;
 `;
 
 export default () => {
@@ -70,6 +71,16 @@ export default () => {
   return (
     <Centerer>
       <GlobalStyle />
+      <Order>
+        Bougez les curseurs sous le graphique pour changer les horaires
+        d'allumage !<br />
+        L'éclairage est déjà configuré pour s'éteindre lorsqu'il fait jour.
+        <br />
+        Vous pouvez uniquement faire varier l'heure d'allumage du matin et
+        l'heure d'extinction en soirée.
+      </Order>
+      <Legend />
+      <br />
       <EphemerisContainer>
         <Ephemeris
           data={dataWithSavings}
@@ -77,7 +88,7 @@ export default () => {
           lightsOffTime={lightingTime[1]}
         />
       </EphemerisContainer>
-      <Order>Bougez les curseurs pour changer les horaires d'allumage !</Order>
+      <br/>
       <RangeSlider value={lightingTime} onChange={setLightingTime} />
       <Explanation
         onTime={readableTime(lightingTime[0])}

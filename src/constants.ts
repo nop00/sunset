@@ -18,3 +18,10 @@ export const CURRENT_LIGHTING_TIME = 4100;
 
 // Durée du jour en secondes
 export const DAY_DURATION = 24 * 60 * 60;
+
+export enum Colors {
+  Night = "midnightblue",
+  Sunlight = "lightyellow",
+  Twilight = "lightblue",
+  Lighting = "yellow"
+}

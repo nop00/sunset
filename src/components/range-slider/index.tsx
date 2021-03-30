@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { range, map, throttle } from "lodash";
 import { readableTime } from "../../utils/time";
 import Tooltip from "@material-ui/core/Tooltip";
+import { Colors } from "../../constants";
 
 interface Props {
   value: [number, number];
@@ -28,10 +29,10 @@ const SunsetSlider = withStyles({
   },
   track: {
     height: 8,
-    backgroundColor: "yellow",
+    backgroundColor: Colors.Lighting,
     border: "1px solid rgba(0,0,0,.25)"
   },
-  rail: { height: 10, backgroundColor: "midnightblue", opacity: 1 },
+  rail: { height: 10, backgroundColor: Colors.Night, opacity: 1 },
   mark: { backgroundColor: "white" },
   markActive: { backgroundColor: "black" }
 })(Slider);
