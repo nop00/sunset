@@ -37,11 +37,6 @@ const EphemerisContainer = styled.div`
   height: 50vh;
 `;
 
-const Order = styled.div`
-  text-align: center;
-  margin: 1em 0;
-`;
-
 export default () => {
   const dataWithSavings = map(data, day => {
     const curDay = new Date(day.date);
@@ -71,14 +66,6 @@ export default () => {
   return (
     <Centerer>
       <GlobalStyle />
-      <Order>
-        Bougez les curseurs sous le graphique pour changer les horaires
-        d'allumage !<br />
-        L'éclairage est déjà configuré pour s'éteindre lorsqu'il fait jour.
-        <br />
-        Vous pouvez uniquement faire varier l'heure d'allumage du matin et
-        l'heure d'extinction en soirée.
-      </Order>
       <Legend />
       <br />
       <EphemerisContainer>
