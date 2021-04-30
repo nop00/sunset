@@ -4,7 +4,7 @@ Une interface pour visualiser l'impact de l'éclairage nocturne sur la consommat
 
 Démo : https://lces-sunset.netlify.app/
 
-#Améliorations possibles
+### Améliorations possibles
 
 - afficher un tooltip sur le jour survolé (date, heures de crépuscule, durée de la nuit…)
 - améliorer l'utilisation sur mobile
