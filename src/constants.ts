@@ -11,13 +11,13 @@ export const HOUSEHOLD_YEARLY_CONSUMPTION = 4700;
 export const CYCLIST_HOURLY_PRODUCTION = 0.2;
 
 // Population de la commune
-export const POPULATION = 3141;
+export const POPULATION = 5882;
 
 // Année des données concernant la population de la ville
-export const CENSUS_YEAR = 2017;
+export const CENSUS_YEAR = 2018;
 
 // Url de la page indiquant la population de la ville
-export const CENSUS_URL = "https://www.insee.fr/fr/statistiques/1405599?geo=COM-60142";
+export const CENSUS_URL = "https://www.insee.fr/fr/statistiques/2011101?geo=COM-77037";
 
 // Durée d'éclairage annuelle
 export const CURRENT_LIGHTING_TIME = 4100;
@@ -26,10 +26,10 @@ export const CURRENT_LIGHTING_TIME = 4100;
 export const DAY_DURATION = 24 * 60 * 60;
 
 // Nom de la ville
-export const CITY_NAME = "La Chapelle-en-Serval";
+export const CITY_NAME = "Bois-le-Roi";
 
 // Nom des habitants
-export const CITY_INHABITANTS = "Capellois";
+export const CITY_INHABITANTS = "Bacot";
 
 // Année de la facture d'éclairage public dont sont extraites les données
 export const PUBLIC_LIGHTING_INVOICE_YEAR = 2019;
