@@ -34,6 +34,12 @@ export const CITY_INHABITANTS = "Bacot";
 // Année de la facture d'éclairage public dont sont extraites les données
 export const PUBLIC_LIGHTING_INVOICE_YEAR = 2019;
 
+// Latitude de la commune
+export const CITY_LATITUDE = 49.1273;
+
+// Longitude de la commune
+export const CITY_LONGITUDE = 2.53406;
+
 export enum Colors {
   Night = "midnightblue",
   Sunlight = "lightyellow",
