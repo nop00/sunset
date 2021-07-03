@@ -35,10 +35,10 @@ export const CITY_INHABITANTS = "Bacot";
 export const PUBLIC_LIGHTING_INVOICE_YEAR = 2019;
 
 // Latitude de la commune
-export const CITY_LATITUDE = 49.1273;
+export const CITY_LATITUDE = 48.474315;
 
 // Longitude de la commune
-export const CITY_LONGITUDE = 2.53406;
+export const CITY_LONGITUDE = 2.691822;
 
 export enum Colors {
   Night = "midnightblue",
