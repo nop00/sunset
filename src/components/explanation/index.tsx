@@ -127,7 +127,7 @@ export const Explanation = ({ onTime, offTime, newLightingTime }: IProps) => {
           </dt>
           <dd>
             Factures d'électricité d'éclairage public de {CITY_NAME}{' '}
-             de {PUBLIC_LIGHTING_INVOICE_YEAR} (consultables en mairie)
+             de {PUBLIC_LIGHTING_INVOICE_YEAR}
           </dd>
 
           <dt>
