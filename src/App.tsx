@@ -60,8 +60,8 @@ export default () => {
 
   const lightingDuration = yearlyLightingTime(
     data,
-    lightingTime[0],
-    lightingTime[1]
+    lightingTime[1],
+    lightingTime[0]
   );
 
   return (
@@ -72,15 +72,15 @@ export default () => {
       <EphemerisContainer>
         <Ephemeris
           data={dataWithSavings}
-          lightsOnTime={lightingTime[0]}
-          lightsOffTime={lightingTime[1]}
+          lightsOnTime={lightingTime[1]}
+          lightsOffTime={lightingTime[0]}
         />
       </EphemerisContainer>
       <br/>
       <RangeSlider value={lightingTime} onChange={setLightingTime} />
       <Explanation
-        onTime={readableTime(lightingTime[0])}
-        offTime={readableTime(lightingTime[1])}
+        onTime={readableTime(lightingTime[1])}
+        offTime={readableTime(lightingTime[0])}
         newLightingTime={lightingDuration}
       />
     </Centerer>

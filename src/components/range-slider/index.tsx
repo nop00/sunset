@@ -66,7 +66,7 @@ export const RangeSlider = ({
   );
 
   const handleChange = (event: any, newValue: number | number[]) => {
-    if (newValue[0] <= 9 * 60 * 60 && newValue[1] >= 17 * 60 * 60) {
+    if (newValue[0] <= (newValue[1] - 1 * 60 * 60)) {
       setValue(newValue as number[]);
       throttledChange(newValue);
     }

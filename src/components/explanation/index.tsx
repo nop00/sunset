@@ -93,8 +93,11 @@ export const Explanation = ({ onTime, offTime, newLightingTime }: IProps) => {
     <div>
       <Big>
         <Sentence>
-          En allumant l'éclairage public à <strong>{onTime}</strong> et en
-          l'éteignant à <strong>{offTime}</strong>,<br />
+            {newLightingTime}
+          Aujourd'hui l'éclairage public est allumé<br/>
+          à partir la tombée de la nuit jusqu'au lever du jour.<br/>
+          <br/>
+          En éteignant l'éclairage de <strong>{offTime}</strong> à <strong>{onTime}</strong>,<br />
           la commune économiserait{" "}
           <strong>{toQuantity(energySaving)} kWh</strong> d'électricité,
           <br />
