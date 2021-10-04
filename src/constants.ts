@@ -1,8 +1,8 @@
 // Puissance totale installée dans la commune
-export const INSTALLED_POWER = 58.488;
+export const INSTALLED_POWER = 96.9375;
 
 // Prix en € du kWh
-export const COST_PER_WH = 0.12;
+export const COST_PER_WH = 0.1197;
 
 // Consommation annuelle moyenne d'un foyer
 export const HOUSEHOLD_YEARLY_CONSUMPTION = 4700;
