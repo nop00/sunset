@@ -28,13 +28,17 @@ const SunsetSlider = withStyles({
     "&:focus, &:hover, &$active": { boxShadow: "inherit" }
   },
   track: {
+    height: 10,
+    backgroundColor: Colors.Night,
+  },
+  rail: {
     height: 8,
     backgroundColor: Colors.Lighting,
-    border: "1px solid rgba(0,0,0,.25)"
+    border: "1px solid rgba(0,0,0,.25)",
+    opacity: 1
   },
-  rail: { height: 10, backgroundColor: Colors.Night, opacity: 1 },
-  mark: { backgroundColor: "white" },
-  markActive: { backgroundColor: "black" }
+  mark: { backgroundColor: "black" },
+  markActive: { backgroundColor: "white" }
 })(Slider);
 
 const SunsetTooltip = withStyles({ tooltip: { fontSize: "120%" } })(Tooltip);
@@ -66,9 +70,10 @@ export const RangeSlider = ({
   );
 
   const handleChange = (event: any, newValue: number | number[]) => {
-    if (newValue[0] <= (newValue[1] - 1 * 60 * 60)) {
-      setValue(newValue as number[]);
-      throttledChange(newValue);
+    const value = newValue as number[];
+    if (value[0] <= (value[1] - 1 * 60 * 60)) {
+      setValue(value);
+      throttledChange(value);
     }
   };
 

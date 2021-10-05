@@ -93,7 +93,6 @@ export const Explanation = ({ onTime, offTime, newLightingTime }: IProps) => {
     <div>
       <Big>
         <Sentence>
-            {newLightingTime}
           Aujourd'hui l'éclairage public est allumé<br/>
           à partir la tombée de la nuit jusqu'au lever du jour.<br/>
           <br/>
