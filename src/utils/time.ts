@@ -27,8 +27,8 @@ export const readableTime = (time: string | number): string => {
 
 export const yearlyLightingTime = (
   data: Day[],
-  lightsOnTime: number,
-  lightsOffTime: number
+  lightsOffTime: number,
+  lightsOnTime: number
 ): number => {
   const lightsOffDuration: number = lightsOnTime - lightsOffTime;
   return round(

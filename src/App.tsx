@@ -55,8 +55,8 @@ export default () => {
 
   const lightingDuration = yearlyLightingTime(
     data,
-    lightingTime[1],
-    lightingTime[0]
+    lightingTime[0],
+    lightingTime[1]
   );
 
   return (

@@ -31,8 +31,8 @@ describe("yearlyLightingTime", () => {
     expect(
       yearlyLightingTime(
         data,
-        timeToSeconds("24:00:00"),
-        timeToSeconds("00:00:00")
+        timeToSeconds("00:00:00"),
+        timeToSeconds("24:00:00")
       )
     ).toEqual(0);
   });
@@ -49,8 +49,8 @@ describe("yearlyLightingTime", () => {
     expect(
       yearlyLightingTime(
         data,
-        timeToSeconds("24:00:00"),
-        timeToSeconds("01:00:00")
+        timeToSeconds("01:00:00"),
+        timeToSeconds("24:00:00")
       )
     ).toEqual(365);
   });
