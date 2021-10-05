@@ -11,11 +11,6 @@ import styled, { createGlobalStyle } from "styled-components";
 const SUMMER = new Date("2021-03-28");
 const WINTER = new Date("2021-10-31");
 
-const minOnTime = 0; // Minuit
-const maxOnTime = 9 * 60 * 60; // 9h
-const minOffTime = 17 * 60 * 60; // 17h
-const maxOffTime = 24 * 60 * 60; // Minuit
-
 const offsetTime = (time: string) => {
   const splitTime = split(time, ":");
   return join([+splitTime[0] + 1, splitTime[1], splitTime[2]], ":");
@@ -54,8 +49,8 @@ export default () => {
   });
 
   const [lightingTime, setLightingTime] = useState<[number, number]>([
-    random(minOnTime / 300, maxOnTime / 300) * 300,
-    random(minOffTime / 300, maxOffTime / 300) * 300
+    0,
+    5 * 60 * 60
   ]);
 
   const lightingDuration = yearlyLightingTime(
