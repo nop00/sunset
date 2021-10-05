@@ -31,8 +31,8 @@ describe("yearlyLightingTime", () => {
     expect(
       yearlyLightingTime(
         data,
-        timeToSeconds("12:00:00"),
-        timeToSeconds("12:00:00")
+        timeToSeconds("24:00:00"),
+        timeToSeconds("00:00:00")
       )
     ).toEqual(0);
   });
@@ -41,18 +41,18 @@ describe("yearlyLightingTime", () => {
       yearlyLightingTime(
         data,
         timeToSeconds("00:00:00"),
-        timeToSeconds("24:00:00")
+        timeToSeconds("00:00:00")
       )
-    ).toEqual(4104.15);
+    ).toEqual(4105.88);
   });
   test("partial lighting", () => {
     expect(
       yearlyLightingTime(
         data,
-        timeToSeconds("05:00:00"),
-        timeToSeconds("23:00:00")
+        timeToSeconds("24:00:00"),
+        timeToSeconds("01:00:00")
       )
-    ).toEqual(1938.38);
+    ).toEqual(365);
   });
 });
 
