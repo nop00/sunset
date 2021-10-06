@@ -5,6 +5,7 @@ import { range, map, throttle } from "lodash";
 import { readableTime } from "../../utils/time";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Colors } from "../../constants";
+import { sliderValueToHumanTime } from "../../utils/time";
 
 interface Props {
   value: [number, number];
@@ -12,10 +13,15 @@ interface Props {
   className?: string;
 }
 
-const marks = map(range(0, 25), tick => ({
-  value: tick * 60 * 60,
-  label: tick % 3 === 0 && tick + "h"
-}));
+const markTickToHours = (value: number) => (value + 24) % 24;
+
+const marks = map(range(-12, 13), tick => {
+    const hours = markTickToHours(tick);
+    return {
+        value: tick * 60 * 60,
+        label: hours !== 0 ? hours % 3 === 0 && hours + "h" : "Minuit"
+    };
+});
 
 const SunsetSlider = withStyles({
   thumb: {
@@ -70,7 +76,7 @@ export const RangeSlider = ({
   );
 
   const handleChange = (event: any, newValue: number | number[]) => {
-    const value = newValue as number[];
+    const value = (newValue as number[]);//.map(sliderValueToTime);
     if (value[0] <= (value[1] - 1 * 60 * 60)) {
       setValue(value);
       throttledChange(value);
@@ -79,14 +85,14 @@ export const RangeSlider = ({
 
   return (
     <SunsetSlider
-      min={0}
-      max={24 * 60 * 60}
+      min={-12 * 60 * 60}
+      max={12 * 60 * 60}
       step={60 * 5}
       className={className}
       value={value}
       onChange={handleChange}
       valueLabelDisplay="on"
-      valueLabelFormat={s => readableTime(s)}
+      valueLabelFormat={s => readableTime(sliderValueToHumanTime(s))}
       aria-labelledby="range-slider"
       marks={marks}
       ValueLabelComponent={ValueLabelComponent}

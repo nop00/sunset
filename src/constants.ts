@@ -24,6 +24,7 @@ export const CURRENT_LIGHTING_TIME = 4000;
 
 // Durée du jour en secondes
 export const DAY_DURATION = 24 * 60 * 60;
+export const MIDDAY_DURATION = 12 * 60 * 60;
 
 // Nom de la ville
 export const CITY_NAME = "Bois-le-Roi";

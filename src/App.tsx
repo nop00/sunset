@@ -7,6 +7,7 @@ import { getSunData } from "./utils/ephemeris";
 import { map, split, join, random } from "lodash";
 import { readableTime, yearlyLightingTime } from "./utils/time";
 import styled, { createGlobalStyle } from "styled-components";
+import { sliderValueToHumanTime } from "./utils/time";
 
 const SUMMER = new Date("2021-03-28");
 const WINTER = new Date("2021-10-31");
@@ -67,15 +68,15 @@ export default () => {
       <EphemerisContainer>
         <Ephemeris
           data={dataWithSavings}
-          lightsOnTime={lightingTime[1]}
-          lightsOffTime={lightingTime[0]}
+          lightsOffTime={sliderValueToHumanTime(lightingTime[0])}
+          lightsOnTime={sliderValueToHumanTime(lightingTime[1])}
         />
       </EphemerisContainer>
       <br/>
       <RangeSlider value={lightingTime} onChange={setLightingTime} />
       <Explanation
-        onTime={readableTime(lightingTime[1])}
-        offTime={readableTime(lightingTime[0])}
+        offTime={readableTime(sliderValueToHumanTime(lightingTime[0]))}
+        onTime={readableTime(sliderValueToHumanTime(lightingTime[1]))}
         newLightingTime={lightingDuration}
       />
     </Centerer>
